@@ -23,7 +23,7 @@ const tempWatchedData = [
     userRating: 9,
   },
 ];
-function Watchedbox() {
+function Watchedbox({ movies }) {
   const [watched, setWatched] = useState(tempWatchedData);
   const [isOpen2, setIsOpen2] = useState(true);
   return (
@@ -36,7 +36,7 @@ function Watchedbox() {
       </button>
       {isOpen2 && (
         <>
-          <Watchedsummary watched={watched} />
+          <Watchedsummary watched={watched} movies={movies} />
           <WatchedList watched={watched} />
         </>
       )}

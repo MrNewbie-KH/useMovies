@@ -1,12 +1,4 @@
-import { useState } from "react";
-import Listbox from "./Listbox";
-import Watchedbox from "./Watchedbox";
-function Main() {
-  return (
-    <main className="main">
-      <Listbox />
-      <Watchedbox />
-    </main>
-  );
+function Main({ children }) {
+  return <main className="main">{children}</main>;
 }
 export default Main;
