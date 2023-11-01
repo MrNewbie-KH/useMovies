@@ -9,3 +9,4 @@
 - [x] Both boxes are the same the list box and the watched box so instead of having two different comonents we gonna use on as reusable component for both of them.
 - [x] create spinner
 - [x] add error handling in two places first no data with this second no internet so no fitching
+- [] adding watched moie

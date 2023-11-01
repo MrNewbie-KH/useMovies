@@ -51,6 +51,7 @@ body {
 
 .box {
   display: flex;
+  flex-direction: column;
   width: 42rem;
   max-width: 42rem;
   background-color: var(--color-background-500);

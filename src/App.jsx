@@ -26,6 +26,25 @@ export default function App() {
   function closeSelectedMovie(id) {
     setSelectedId(null);
   }
+  function handleAddMovie(movie) {
+    const index = watched.findIndex((item) => {
+      return item.imdbID === movie.imdbID;
+    });
+    // console.log(index);
+    if (index === -1) setWatched((current) => [...current, movie]);
+    else {
+      const newArray = watched.map((item, idx) => {
+        if (idx === index) return movie;
+        else return item;
+      });
+      setWatched(newArray);
+    }
+  }
+  function handleDeleteWatchedMovie(id) {
+    setWatched((current) => {
+      return current.filter((m) => m.imdbID !== id);
+    });
+  }
   useEffect(() => {
     async function fetchData() {
       try {
@@ -81,11 +100,15 @@ export default function App() {
             <SelectedMovie
               selectedId={selectedId}
               closeSelectedMovie={closeSelectedMovie}
+              handleAddMovie={handleAddMovie}
             />
           ) : (
             <>
               <Watchedsummary watched={watched} movies={movies} />
-              <WatchedList watched={watched} />
+              <WatchedList
+                watched={watched}
+                handleDeleteWatchedMovie={handleDeleteWatchedMovie}
+              />
             </>
           )}
         </Box>

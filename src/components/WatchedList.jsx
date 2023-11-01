@@ -1,4 +1,4 @@
-function WatchedList({ watched }) {
+function WatchedList({ watched, handleDeleteWatchedMovie }) {
   return (
     <ul className="list">
       {watched.map((movie) => (
@@ -16,9 +16,15 @@ function WatchedList({ watched }) {
             </p>
             <p>
               <span>⏳</span>
-              <span>{movie.runtime} min</span>
+              <span>{movie.Runtime} min</span>
             </p>
           </div>
+          <button
+            className="btn-delete"
+            onClick={() => handleDeleteWatchedMovie(movie.imdbID)}
+          >
+            X
+          </button>
         </li>
       ))}
     </ul>

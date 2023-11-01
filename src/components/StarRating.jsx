@@ -10,12 +10,18 @@ const starContainerStyle = {
   display: "flex",
 };
 
-function StarRating({ maxNumberOfStars = 5, color = "#fcc419", size = 48 }) {
+function StarRating({
+  maxNumberOfStars = 5,
+  color = "#fcc419",
+  size = 48,
+  setUserRating,
+}) {
   const [rating, setRating] = useState(0);
   const [tempRating, setTempRating] = useState(0);
 
   function handleRating(num) {
     setRating(num);
+    setUserRating(num);
   }
   const textStyle = {
     lineHeight: "1",
