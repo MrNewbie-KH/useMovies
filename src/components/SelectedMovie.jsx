@@ -28,11 +28,27 @@ function SelectedMovie({ selectedId, closeSelectedMovie, handleAddMovie }) {
       getMovieById();
     },
     [selectedId]
-  ); // Change the dependency to selectedId
-  // effect to change tab title
+  );
+  useEffect(function () {
+    document.addEventListener("keydown", function (e) {
+      if (e.code === "Escape") closeSelectedMovie(selectedId);
+    });
+    // we need a clean up function
+    // console.log("closed");
+    return function () {
+      document.removeEventListener("keydown", function (e) {
+        if (e.code === "Escape") closeSelectedMovie(selectedId);
+      });
+    };
+  }, []);
   useEffect(
     function () {
       document.title = movie.Title;
+      // clean up
+      return function () {
+        document.title = "usePopcorn";
+        console.log(movie.Title); // becuase of closures
+      };
     },
     [movie]
   );
