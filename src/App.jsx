@@ -11,6 +11,7 @@ import Watchedsummary from "./components/Watchedsummary";
 import Loader from "./components/Loader";
 import Error from "./components/Error";
 import SelectedMovie from "./components/SelectedMovie";
+import { useLocalStorage } from "./useLocalStorage";
 export default function App() {
   // top level code is render logic
   const [movies, setMovies] = useState([]);
@@ -20,9 +21,10 @@ export default function App() {
   const [selectedId, setSelectedId] = useState(null);
   // const [watched, setWatched] = useState([]);
   // instead let's use a callback
-  const [watched, setWatched] = useState(() => {
-    return JSON.parse(localStorage.getItem("watched"));
-  });
+  // const [watched, setWatched] = useState(() => {
+  //   return JSON.parse(localStorage.getItem("watched"));
+  // });
+  const [watched, setWatched] = useLocalStorage([], "watched"); // instead we gonna create custom hook
 
   function openSelectedMovie(id) {
     setSelectedId(() => (id === selectedId ? null : id));
@@ -49,9 +51,11 @@ export default function App() {
       return current.filter((m) => m.imdbID !== id);
     });
   }
-  useEffect(() => {
-    localStorage.setItem("watched", JSON.stringify(watched));
-  }, [watched]);
+  // moved to custom hook file
+  // useEffect(() => {
+  //   localStorage.setItem("watched", JSON.stringify(watched));
+  // }, [watched]);
+
   useEffect(() => {
     async function fetchData() {
       try {
