@@ -1,9 +1,17 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import StarRating from "./StarRating";
 import Loader from "./Loader";
 function SelectedMovie({ selectedId, closeSelectedMovie, handleAddMovie }) {
   const [movie, setMovie] = useState({});
   const [userRating, setUserRating] = useState("");
+  // another useEffect for updating the ref each time userRating is changed for same movie before making final descision
+  const countRef = useRef(0);
+  useEffect(
+    function () {
+      if (userRating) countRef.current += 1;
+    },
+    [userRating]
+  );
   useEffect(
     function () {
       async function getMovieById() {
@@ -62,6 +70,7 @@ function SelectedMovie({ selectedId, closeSelectedMovie, handleAddMovie }) {
       imdbRating: movie.Ratings.at(0).Value,
       Runtime: Number(movie.Runtime.split(" ")[0]),
       userRating,
+      countRating: countRef.current, //no need to be rendered on the screen so it is only used for deep logic
     };
     // console.log(newMovie);
 
